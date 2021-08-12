@@ -1,3 +1,6 @@
 **.swp
 **.csv
 .python-version
+./data/holdout.csv
+./data/store.csv
+./data/train.csv
