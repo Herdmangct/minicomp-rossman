@@ -1,15 +1,26 @@
 ## Rossman Kaggle Mini-Competition
 
-This mini competition is adapted from the Kaggle Rossman challenge.  Please refrain from looking at the challenge on Kaggle until after you have finished - this will allow you to get a true measurement of where you are at as a data scientist.
+This mini competition is adapted from the Kaggle Rossman challenge.
 
-## Setup
+## Steps to Run 
+1. Clone this repository to your local machine `git clone https://github.com/Herdmangct/minicomp-rossman.git`
+2. Navigate to the `minicomp-rossman` folder in your terminal/shell and run `python main.py`
+3. Enjoy the model results
 
-```bash
-#  during the competition run
-python data.py
+## Task
 
-#  at test time run
-python data.py --test 1
+The task is to predict the `Sales` of a given store on a given day.
+
+Submissions are evaluated on the root mean square percentage error (RMSPE):
+
+![](./assets/rmspe.png)
+
+```python
+def metric(preds, actuals):
+    preds = preds.reshape(-1)
+    actuals = actuals.reshape(-1)
+    assert preds.shape == actuals.shape
+    return 100 * np.linalg.norm((actuals - preds) / actuals) / np.sqrt(preds.shape[0])
 ```
 
 ## Dataset
@@ -24,7 +35,7 @@ The dataset is made of two csvs:
 ['Date', 'Store', 'DayOfWeek', 'Sales', 'Customers', 'Open', 'Promo','StateHoliday', 'SchoolHoliday']
 ```
 
-More info from Kaggle:
+Data dictionary from Kaggle:
 
 ```
 Id - an Id that represents a (Store, Date) duple within the test set
@@ -68,52 +79,3 @@ data
 ├── store.csv
 └── train.csv
 ```
-
-## Scoring Criteria
-
-The competition is scored based on a composite of predictive accuracy and reproducibility.
-
-## Predictive accuracy
-
-The task is to predict the `Sales` of a given store on a given day.
-
-Submissions are evaluated on the root mean square percentage error (RMSPE):
-
-![](./assets/rmspe.png)
-
-```python
-def metric(preds, actuals):
-    preds = preds.reshape(-1)
-    actuals = actuals.reshape(-1)
-    assert preds.shape == actuals.shape
-    return 100 * np.linalg.norm((actuals - preds) / actuals) / np.sqrt(preds.shape[0])
-```
-
-Zero sales days are ignored in scoring - part of your pipeline should look for these rows and drop them (in both test & train)
-
-The team scores will be ranked - the highest score (lowest RMSPE) will receive a score of 10 for the scoring criteria section.
-
-Each lower score (higher RMSPE) will receive a score of 10-(1 * number in ranking). If they are ranked second, score will be 10-2 = 8. 
-
-## Reproducibility
-
-The entire model should be completely reproducible - to score this the teacher will clone your repository and follow the instructions as per the readme.  All teams start out with a score of 10.  One point is deducted for each step not included in the repo.
-
-## Advice
-
-Commit early and often
-
-Notebooks don't merge easily!
-
-Visualize early
-
-Look at the predictions your model is getting wrong - can you engineer a feature for those samples?
-
-Models
-- baseline (average sales per store from in training data)
-- random forest
-- XGBoost
-
-Use your DSR instructor(s)
-- you are not alone - they are here to help with both bugs and data science advice
-- git issues, structuring the data on disk, models to try, notebook problems and conda problems are all things we have seen before
