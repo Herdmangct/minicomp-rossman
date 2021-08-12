@@ -19,7 +19,11 @@ conda activate rossman
 ```
 git clone https://github.com/Herdmangct/minicomp-rossman.git
 ```
-4. Navigate to the `minicomp-rossman` folder in your terminal/shell and run 
+4. Navigate to the `minicomp-rossman` folder in your terminal/shell 
+```
+cd minicomp-rossman
+```
+5. run 
 ```
 python3 main.py
 ```
