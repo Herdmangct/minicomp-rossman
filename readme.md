@@ -3,8 +3,14 @@
 This mini competition is adapted from the Kaggle Rossman challenge.
 
 ## Steps to Run 
-1. Clone this repository to your local machine `git clone https://github.com/Herdmangct/minicomp-rossman.git`
-2. Navigate to the `minicomp-rossman` folder in your terminal/shell and run `python main.py`
+1. Clone this repository to your local machine. 
+```
+git clone https://github.com/Herdmangct/minicomp-rossman.git
+```
+2. Navigate to the `minicomp-rossman` folder in your terminal/shell and run 
+```
+python main.py
+```
 3. Enjoy the model results
 
 ## Task
