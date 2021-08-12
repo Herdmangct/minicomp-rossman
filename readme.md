@@ -9,7 +9,7 @@ This mini competition is adapted from the Kaggle Rossman challenge.
 ## Steps to Run 
 1. Create a new Anacoda environment 
 ```
-conda create -m rossman python=3.8
+conda create -n rossman python=3.8
 ```
 2. Activate the new Anaconda environment
 ```
