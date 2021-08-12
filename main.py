@@ -8,7 +8,11 @@ import model as m
 # MAIN METHOD
 # Install the required packages
 print('INSTALLING THE REQUIRED PACKAGES')
-os.system('pip install -r requirements.txt')
+os.system('pip install pandas')
+os.system('pip install numpy')
+os.system('pip install scikit-learn')
+os.system('pip install xgboost')
+# os.system('pip install -r requirements.txt')
 print()
 
 # Unzip the data
