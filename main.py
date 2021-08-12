@@ -6,11 +6,6 @@ import os
 import model as m
 
 # MAIN METHOD
-# Install the required packages
-print('INSTALLING THE REQUIRED PACKAGES')
-os.system('pip install -r requirements.txt')
-print()
-
 # Unzip the data
 print('UNZIPPING THE DATA')
 print('Unzipping the training data')

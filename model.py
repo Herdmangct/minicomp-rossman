@@ -1,5 +1,8 @@
+# Make sure the requirements are installed
 import os
+print('INSTALLING THE REQUIRED PACKAGES')
 os.system('pip install -r requirements.txt')
+print()
 
 # Standard 
 import pandas as pd
