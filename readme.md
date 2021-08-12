@@ -4,17 +4,26 @@ This mini competition is adapted from the Kaggle Rossman challenge.
 
 ## Requirements
 1. Python3 installed on your system
+2. Anaconda 
 
 ## Steps to Run 
-1. Clone this repository to your local machine. 
+1. Create a new Anacoda environment 
+```
+conda create -m rossman python=3.8
+```
+2. Activate the new Anaconda environment
+```
+conda activate rossman
+```
+3. Clone this repository to your local machine. 
 ```
 git clone https://github.com/Herdmangct/minicomp-rossman.git
 ```
-2. Navigate to the `minicomp-rossman` folder in your terminal/shell and run 
+4. Navigate to the `minicomp-rossman` folder in your terminal/shell and run 
 ```
 python3 main.py
 ```
-3. Enjoy the model results
+5. Enjoy the model results
 
 ## Task
 
