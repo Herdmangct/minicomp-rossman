@@ -27,7 +27,7 @@ cd minicomp-rossman
 ```
 python3 main.py
 ```
-5. Enjoy the model results
+6. Enjoy the model results
 
 ## Task
 
