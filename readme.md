@@ -1,6 +1,7 @@
 ## Rossman Kaggle Mini-Competition
 
 This mini competition is adapted from the Kaggle Rossman challenge.
+Slides - https://docs.google.com/presentation/d/1It5FkJvhI9_pyKVFcejSxJg0LTwYNSaLTJQmi6uEpfA/edit#slide=id.p
 
 ## Requirements
 1. Python3 installed on your system
