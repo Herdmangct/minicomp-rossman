@@ -3,6 +3,11 @@
 This mini competition is adapted from the Kaggle Rossman challenge.
 Slides - https://docs.google.com/presentation/d/1It5FkJvhI9_pyKVFcejSxJg0LTwYNSaLTJQmi6uEpfA/edit#slide=id.p
 
+## Future impovements 
+1. Create a simple web app where you can drag and drop the test.csv and then the results of my model will be displayed with some graphs
+2. Use feature engineering to make the model accuracy better
+3. Hyper parameter tuning to make the model accuracy even better. 
+
 ## Requirements
 1. Python3 installed on your system
 2. Anaconda 
