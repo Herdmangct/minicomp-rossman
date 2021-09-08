@@ -232,11 +232,11 @@ def build_models_and_print_results(test_data_path, store_data_path='./data/store
     
     # load the train dataset
     print("LOAD THE DATASETS")
-    print("Loading the train dataset")
+    print("Loading train dataset")
     X_train, y_train = get_x_and_y_datasets(store_data_path=store_data_path, data_path=train_data_path)
     
     # load the test dataset
-    print("Loading the test dataset")
+    print("Loading test dataset")
     X_test, y_test = get_x_and_y_datasets(store_data_path=store_data_path, data_path=test_data_path)
     
     # get model results
