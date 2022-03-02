@@ -255,7 +255,7 @@ def build_and_run_xgboost(X_train, y_train, X_test, y_test):
     
     return metric(xgboost_predictions, y_test.to_numpy())
 
-# Build models function
+# Build and run model functions
 def build_models(store_data_path='./data/store.csv', train_data_path='./data/train.csv'):
     
     # Load the datasets
@@ -274,6 +274,8 @@ def build_models(store_data_path='./data/store.csv', train_data_path='./data/tra
 
     print("Training XGBoost model")
     xgboost_model = build_xgboost_model(X_train, y_train)
+
+    print("DONE!")
     
     return linear_regression_model, random_forest_model, xgboost_model
 
@@ -305,6 +307,8 @@ def get_results(test_data_path='./data/holdout.csv', store_data_path='./data/sto
 
     # print model results
     print_model_results(model_results)
+
+    print("DONE!")
     
     return model_results
 
@@ -314,7 +318,7 @@ def get_model_results(X_train, y_train, X_test, y_test):
     print()
     print("TRAIN AND EVALUATE THE MODELS")
     print("Training and evaluating the Mean Regressor model")
-    mean_regressor_metric = run_mean_regressor(y_train, y_test)
+    mean_regressor_metric = build_and_run_mean_regressor(y_train, y_test)
 
     print("Training and evaluating the Linear Regression model")
     linear_regression_metric = build_and_run_linear_regression(X_train, y_train, X_test, y_test)

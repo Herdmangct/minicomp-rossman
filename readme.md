@@ -29,11 +29,17 @@ git clone https://github.com/Herdmangct/minicomp-rossman.git
 ```
 cd minicomp-rossman
 ```
-5. run 
+5. Build the models by running
 ```
-python3 main.py
+python3 main.py build
 ```
-6. Enjoy the model results
+6. Run the models by running
+```
+python3 main.py run
+```
+7. Enjoy the model results
+
+Tip: If you want to run the entire sequence then run `python3 main.py` and it will build and run the model in one command.
 
 ## Task
 
