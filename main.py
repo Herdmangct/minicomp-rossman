@@ -1,6 +1,7 @@
 # IMPORT STATEMENTS
 # IO libraries
 import os
+import sys
 
 # Our Modules
 import model as m
@@ -14,5 +15,12 @@ os.system('python data.py')
 print('Unzipping the test data')
 os.system('python data.py --test 1')
 
-# Run the model
-m.build_models_and_print_results(test_data_path='./data/holdout.csv')
+print(sys.argv[1])
+if sys.argv[1] == 'build':
+    m.build_models()
+elif sys.argv[1] == 'run':
+    m.get_results()
+else:
+    m.build_models_and_print_results()
+
+# Run Models

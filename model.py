@@ -14,6 +14,9 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor
 
+# Save the module
+import joblib
+
 # Our modules 
 from helper_methods import *
 
@@ -177,11 +180,45 @@ def build_and_run_mean_regressor(y_train, y_test):
     
     return metric(mean_predictions, y_test.to_numpy())
 
+# Linear Regression
+def build_linear_regression_model(X_train, y_train):
+    regressor = LinearRegression().fit(X_train, y_train)
+    joblib.dump(regressor, './models/linear_regression_model.sav')
+
+    return regressor
+
+def run_linear_regression(X_test, y_test):
+    regressor = joblib.load('./models/linear_regression_model.sav')
+    linear_regression_predictions = regressor.predict(X_test)
+
+    return metric(linear_regression_predictions, y_test.to_numpy())
+
 def build_and_run_linear_regression(X_train, y_train, X_test, y_test):
     regressor = LinearRegression().fit(X_train, y_train)
     linear_regression_predictions = regressor.predict(X_test)
     
     return metric(linear_regression_predictions, y_test.to_numpy())
+
+# Random Forest
+def build_random_forest_model(X_train, y_train):
+    regressor_random_forest = RandomForestRegressor(
+        n_estimators=40,
+        min_samples_leaf=2,
+        max_features=0.99,
+        n_jobs=-1,
+        oob_score=True
+    )
+    regressor_random_forest.fit(X_train, y_train)
+
+    joblib.dump(regressor_random_forest, './models/random_forest_regressor_model.sav')
+
+    return regressor_random_forest
+
+def run_random_forest_model(X_test, y_test):
+    regressor = joblib.load('./models/random_forest_regressor_model.sav')
+    random_forest_predictions = regressor.predict(X_test)
+
+    return metric(random_forest_predictions, y_test.to_numpy())
 
 def build_and_run_random_forest(X_train, y_train, X_test, y_test):
     regressor_random_forest = RandomForestRegressor(n_estimators=40, min_samples_leaf=2, max_features=0.99, n_jobs=-1,oob_score=True)
@@ -190,6 +227,27 @@ def build_and_run_random_forest(X_train, y_train, X_test, y_test):
     
     return metric(random_forest_predictions, y_test.to_numpy())
 
+# XGBoost
+def build_xgboost_model(X_train, y_train):
+    regressor_xgboost = XGBRegressor(
+        n_estimators=1000,
+        max_depth=7, 
+        eta=0.1,
+        subsample=0.7,
+        colsample_bytree=0.8
+    )
+    regressor_xgboost.fit(X_train, y_train)
+
+    joblib.dump(regressor_xgboost, './models/xgboost_regressor_model.sav')
+
+    return regressor_xgboost
+
+def run_xgboost_model(X_test, y_test):
+    regressor_xgboost = joblib.load('./models/xgboost_regressor_model.sav')
+    xgboost_predictions = regressor_xgboost.predict(X_test)
+    
+    return metric(xgboost_predictions, y_test.to_numpy())
+
 def build_and_run_xgboost(X_train, y_train, X_test, y_test):
     regressor_xgboost = XGBRegressor(n_estimators=1000, max_depth=7, eta=0.1, subsample=0.7, colsample_bytree=0.8)
     regressor_xgboost.fit(X_train, y_train)
@@ -197,13 +255,66 @@ def build_and_run_xgboost(X_train, y_train, X_test, y_test):
     
     return metric(xgboost_predictions, y_test.to_numpy())
 
+# Build models function
+def build_models(store_data_path='./data/store.csv', train_data_path='./data/train.csv'):
+    
+    # Load the datasets
+    print("LOADING DATASETS")
+    print("Loading train dataset")
+    X_train, y_train = get_x_and_y_datasets(store_data_path, train_data_path)
+
+    # build the models
+    print()
+    print("BUILDING MODELS")
+    print("Training Linear Regression model")
+    linear_regression_model = build_linear_regression_model(X_train, y_train)
+
+    print("Training Random Forest model")
+    random_forest_model = build_random_forest_model(X_train, y_train)
+
+    print("Training XGBoost model")
+    xgboost_model = build_xgboost_model(X_train, y_train)
+    
+    return linear_regression_model, random_forest_model, xgboost_model
+
+def get_results(test_data_path='./data/holdout.csv', store_data_path='./data/store.csv', train_data_path='./data/train.csv'):
+    # Load the datasets
+    print("LOADING DATASETS")
+    print("Loading train dataset")
+    X_train, y_train = get_x_and_y_datasets(store_data_path=store_data_path, data_path=train_data_path)
+    
+    print("Loading test dataset")
+    X_test, y_test = get_x_and_y_datasets(store_data_path=store_data_path, data_path=test_data_path)
+
+    # Evaluate the models
+    print()
+    print("EVALUATEING MODELS")
+    model_results = {}
+
+    print("Evaluating the Mean Regressor model")
+    model_results["Mean Regressor"] = build_and_run_mean_regressor(y_train, y_test)
+
+    print("Evaluating the Linear Regression model")
+    model_results["Linear Regression"] = run_linear_regression(X_test, y_test)
+
+    print("Evaluating the Random Forest model")
+    model_results["Random Forest"] = run_random_forest_model(X_test, y_test)
+
+    print("Evaluating the XGBoost model")
+    model_results["XGBoost"] = run_xgboost_model(X_test, y_test)
+
+    # print model results
+    print_model_results(model_results)
+    
+    return model_results
+
 # Results Functions
 def get_model_results(X_train, y_train, X_test, y_test):
     
     print()
     print("TRAIN AND EVALUATE THE MODELS")
     print("Training and evaluating the Mean Regressor model")
-    mean_regressor_metric = build_and_run_mean_regressor(y_train, y_test)
+    mean_regressor_metric = run_mean_regressor(y_train, y_test)
 
     print("Training and evaluating the Linear Regression model")
     linear_regression_metric = build_and_run_linear_regression(X_train, y_train, X_test, y_test)
@@ -228,7 +339,7 @@ def print_model_results(results):
         percentage_result = round(result, 2)
         print(f"The RMSPE for the {model} model was {percentage_result}%")
 
-def build_models_and_print_results(test_data_path, store_data_path='./data/store.csv', train_data_path='./data/train.csv'):
+def build_models_and_print_results(test_data_path='./data/holdout.csv', store_data_path='./data/store.csv', train_data_path='./data/train.csv'):
     
     # load the train dataset
     print("LOAD THE DATASETS")
